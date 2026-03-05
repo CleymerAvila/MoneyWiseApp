@@ -1,0 +1,10 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tabs usuario </ion-title>
+    <a  (click)="authService.logout()" >logout</a>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-router-outlet />
+</ion-content>

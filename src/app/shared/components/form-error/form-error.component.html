@@ -1,0 +1,28 @@
+
+@if(showError){
+  @for(error of errorKeys; track error){
+    @if(error === 'required'){
+      <small class="danger">
+        {{label}} is required
+      </small>
+    }
+
+    @if(error === 'email'){
+      <small class="danger">
+        {{label}} is required
+      </small>
+    }
+
+    @if(error === 'minLength'){
+      <small class="danger">
+        Minimun {{ control.errors?.['minLength']?.requiredLength}} characters is required
+      </small>
+    }
+
+    @if(error === 'maxLength'){
+      <small class="danger">
+        Maximum {{ control.errors?.['minLength']?.requiredLength}} characters is required
+      </small>
+    }
+  }
+}

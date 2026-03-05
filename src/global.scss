@@ -34,4 +34,8 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+// @import "@ionic/angular/css/palettes/dark.system.css";
+ion-content {
+  --padding-top: env(safe-area-inset-top);       // respeta la barra superior
+  --padding-bottom: env(safe-area-inset-bottom); // respeta la barra inferior
+}
