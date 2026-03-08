@@ -11,14 +11,18 @@ import { User } from './core/models/user.model';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private storageService: StorageService, private authService: AuthService) {}
+  constructor(private storageService: StorageService, protected authService: AuthService) {}
 
   async ngOnInit(): Promise<void> {
     await this.storageService.init();
     const currentUser = await this.storageService.get<User>('user');
 
     if(currentUser){
-      await this.authService.login(currentUser.email, currentUser.password);
+      this.authService.user$.subscribe({
+        next: () => {
+          currentUser
+        }
+      });
     }
   }
 }

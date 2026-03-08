@@ -1,0 +1,32 @@
+ion-list {
+  --border-radius: 20px;
+}
+
+
+ion-tab-bar {
+  --background: #56e39f;
+  --color: #fff;
+  border: none;
+}
+
+ion-toolbar {
+  --background: #56e39f;
+  --color: #fff;
+  border: none;
+}
+
+ion-segment {
+  --background: #56e39f;
+  border: #56e39f;
+
+  ion-segment-button {
+    color: white;
+    border: none;
+  }
+}
+
+
+ion-segment-button.segment-selected {
+  color: white;
+  border-bottom: #a90505;
+}

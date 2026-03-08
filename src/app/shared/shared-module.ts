@@ -5,11 +5,22 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormErrorComponent } from './components/form-error/form-error.component';
 import { FormInputComponent } from './components/form-input/form-input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
+import { CategoryIconComponent } from './components/category-icon/category-icon.component';
+import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
 
 
 
 @NgModule({
-  declarations: [FormErrorComponent, FormInputComponent],
+  declarations: [
+    FormErrorComponent,
+    FormInputComponent,
+    HeaderComponent,
+    TransactionItemComponent,
+    CategoryIconComponent,
+    TransactionDetailComponent
+  ],
   imports: [
     CommonModule,
     IonicModule,
@@ -23,7 +34,11 @@ import { FormInputComponent } from './components/form-input/form-input.component
     ReactiveFormsModule,
     RouterModule,
     FormErrorComponent,
-    FormInputComponent
+    FormInputComponent,
+    HeaderComponent,
+    TransactionItemComponent,
+    CategoryIconComponent,
+    TransactionDetailComponent
   ]
 })
 export class SharedModule { }

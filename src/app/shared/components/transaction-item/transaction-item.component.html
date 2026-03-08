@@ -1,0 +1,27 @@
+<ion-item (click)="onClicked()">
+  <div
+    slot="start"
+    [class.item-icon--income]="transaction.type === 'Ingreso'"
+    [class.item-icon--expense]="transaction.type !== 'Ingreso'"
+  >
+    <app-category-icon [category]="transaction.category" size="'small'">
+    </app-category-icon>
+  </div>
+
+  <ion-label >
+    <h2>
+      <strong> {{ transaction.category }} </strong>
+    </h2>
+    <p>{{ transaction.type }}</p>
+  </ion-label>
+
+  <ion-label slot="end">
+    <h3 [style]="transaction.type === 'Ingreso' ? 'color: green' : 'color: red'">
+      {{ transaction.type === "Ingreso" ? "+" : "-" }}
+      {{ transaction.amount | currency: "COP" }}
+    </h3>
+    <p style="text-align: end">{{ transaction.issueDate }}</p>
+
+    <p style="text-align: end;"><ion-icon size="medium" [name]="!transaction.proofImage ? 'image' : 'alert-circle'"></ion-icon></p>
+  </ion-label>
+</ion-item>

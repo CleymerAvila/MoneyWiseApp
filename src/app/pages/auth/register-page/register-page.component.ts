@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth-service';
+import { v4 as uuid } from 'uuid';
+
 
 @Component({
   selector: 'app-register-page',
@@ -49,7 +51,7 @@ export class RegisterPageComponent  implements OnInit {
     const passwordValue = this.password.value;
 
     const newUser: User = {
-      id: ++AuthService.userCounted,
+      id: uuid(),
       fullName: fullNameValue,
       email: emailValue,
       password: passwordValue

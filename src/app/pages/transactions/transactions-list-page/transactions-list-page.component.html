@@ -1,0 +1,35 @@
+<!-- <app-header title="title"/> -->
+ <ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Transactions</ion-title>
+  </ion-toolbar>
+  <ion-segment >
+    <ion-segment-button value="list" routerLink="list" routerLinkActive="segment-selected">
+      <ion-label>List</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="search" routerLink="search" routerLinkActive="segment-selected">
+      <ion-label>Search</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content color="light"  >
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon :icon="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list lines="inset">
+    @for (transaction of transactions; track $index) {
+      <app-transaction-item
+        [transaction]="transaction"
+        (onDetail)="onClickedItem($event)"
+      />
+    }
+  </ion-list>
+</ion-content>

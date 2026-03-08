@@ -30,6 +30,5 @@ export class StorageService {
 
   async clearAllData() {
     await this._storage?.clear();
-    console.log('Almacenamiento Limpio!')
   }
 }

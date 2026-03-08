@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="close()" defaultHref="/"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-label> Detalles Transacción </ion-label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-padding">
+<ion-card>
+  <ion-card-header>
+    <ion-grid [fixed]="true" >
+      <ion-row class="ion-justify-content-start">
+        <ion-col>
+          Categoria
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-start">
+          <ion-title>{{ transaction?.category }}</ion-title>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-start">
+        <ion-col>
+          Tipo
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-start">
+          <ion-title>{{ transaction?.type }}</ion-title>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-start">
+        <ion-col>
+          Monto
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-start">
+          <ion-title>{{ transaction?.amount }}</ion-title>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-start">
+        <ion-col>
+          Fecha
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-start">
+          <ion-title>{{ transaction?.issueDate }}</ion-title>
+      </ion-row>
+    </ion-grid>
+  </ion-card-header>
+  <ion-item-divider>
+  </ion-item-divider>
+  <ion-card-content>
+    <ion-grid fixed="true">
+      <ion-row>
+        <ion-label>MÁS DETALLES</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-label>{{transaction?.description}}</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-thumbnail >
+          <img [src]="transaction?.proofImage" [alt]="transaction?.description">
+        </ion-thumbnail>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+</ion-content>

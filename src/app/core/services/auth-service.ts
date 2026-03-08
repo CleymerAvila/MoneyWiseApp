@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  public static userCounted: number = 0;
   private userSubject = new BehaviorSubject<User | null>(null);
   private users: User[] = [];
   user$ = this.userSubject.asObservable();
@@ -43,9 +42,12 @@ export class AuthService {
   async logout(){
     this.storage.remove('user');
     this.userSubject.next(null);
+    this.router.navigate(['./auth/login']);
   }
 
-  isAuthenticated(): boolean {
+  async isAuthenticated(): Promise<boolean> {
+    const currentUser = await this.storage.get<User>('user');
+    this.userSubject.next(currentUser);
     return !!this.userSubject.value;
   }
 

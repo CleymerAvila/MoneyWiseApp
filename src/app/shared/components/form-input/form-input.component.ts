@@ -16,7 +16,7 @@ import { ControlContainer, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR 
 })
 export class FormInputComponent  implements ControlValueAccessor {
   @Input() label!: string;
-  @Input() type: string = 'text';
+  @Input({required: true}) type!: string;
   @Input() controlName!: string;
 
   private onChange: (value: any) => void = () => {};

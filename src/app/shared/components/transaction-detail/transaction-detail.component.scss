@@ -1,0 +1,21 @@
+:host {
+  ion-content {
+    --background: white;
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+
+ion-thumbnail {
+  --size: 200px;
+  --border-radius: 14px;
+}
+
+ion-row {
+  padding: 10px;
+}
+
+
+ion-label, ion-title {
+  color: black;
+}
