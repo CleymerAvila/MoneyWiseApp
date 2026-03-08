@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { Transaction } from 'src/app/core/models/transaction.model';
 import { TransactionService } from 'src/app/core/services/transaction-service';
-import { TransactionDetailComponent } from 'src/app/shared/components/transaction-detail/transaction-detail.component';
 
 @Component({
   selector: 'app-transactions-list-page',
@@ -27,6 +25,10 @@ export class TransactionsListPageComponent  implements OnInit {
 
   onClickedItem(event: any){
    this.router.navigate(['./tabs/transactions/detail', event])
+  }
+
+  handleAction(event: any){
+    this.router.navigate(['./tabs/', event])
   }
 
 }

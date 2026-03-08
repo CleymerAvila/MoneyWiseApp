@@ -1,0 +1,7 @@
+<ion-text
+  [color]="type === 'ingreso' ?  'success':
+  type === 'gasto' ? 'danger' : 'neutral' "
+  [style.fontSize]="size === 'small' ? '16px' : size === 'medium' ? '20px' : '26px'"
+  >
+  {{ type === 'ingreso' ? '+' : type === 'gasto' ? '-' : ''}}{{amount  | currency}}
+</ion-text>

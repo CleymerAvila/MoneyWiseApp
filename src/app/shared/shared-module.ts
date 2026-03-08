@@ -9,6 +9,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
 import { CategoryIconComponent } from './components/category-icon/category-icon.component';
 import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
+import { CategoryBadgeComponent } from './components/category-badge/category-badge.component';
+import { AmountDisplayComponent } from './components/amount-display/amount-display.component';
+import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 
 
 
@@ -19,7 +22,10 @@ import { TransactionDetailComponent } from './components/transaction-detail/tran
     HeaderComponent,
     TransactionItemComponent,
     CategoryIconComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    CategoryBadgeComponent,
+    AmountDisplayComponent,
+    EmptyStateComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +44,10 @@ import { TransactionDetailComponent } from './components/transaction-detail/tran
     HeaderComponent,
     TransactionItemComponent,
     CategoryIconComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    CategoryBadgeComponent,
+    AmountDisplayComponent,
+    EmptyStateComponent
   ]
 })
 export class SharedModule { }

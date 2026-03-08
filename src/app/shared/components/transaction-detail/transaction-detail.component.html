@@ -18,7 +18,12 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-start">
-          <ion-title>{{ transaction?.category }}</ion-title>
+          <!-- <ion-title>{{ transaction?.category }}</ion-title> -->
+          <app-category-badge
+            *ngIf="transaction"
+            [category]="transaction.category"
+            [showIcon]="true"
+          />
       </ion-row>
 
       <ion-row class="ion-justify-content-start">
@@ -36,7 +41,13 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-start">
-          <ion-title>{{ transaction?.amount }}</ion-title>
+          <!-- <ion-title>{{ transaction?.amount }}</ion-title> -->
+           <app-amount-display
+            *ngIf="transaction"
+            [amount]="transaction.amount"
+            [type]="transaction.type.toLocaleLowerCase()"
+            size="large"
+           />
       </ion-row>
 
       <ion-row class="ion-justify-content-start">

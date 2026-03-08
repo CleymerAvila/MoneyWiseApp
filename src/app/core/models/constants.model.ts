@@ -12,11 +12,12 @@ export const CATEGORIES = {
 } as const;
 
 
-export type TransactionType = 'Gasto' | 'Ingreso';
+export type TransactionType = 'Gasto' | 'Ingreso' | 'Neutral';
 
 export const TRANSACTIONS_TYPES = {
   SPENDING: 'Gasto',
-  INCOME: 'Ingreso'
+  INCOME: 'Ingreso',
+  NEUTRAL: 'Neutral'
 } as const;
 
 

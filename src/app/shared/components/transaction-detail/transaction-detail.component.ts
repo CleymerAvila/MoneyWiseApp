@@ -10,14 +10,22 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
   standalone: false,
 })
 export class TransactionDetailComponent  implements OnInit {
-  transaction!: Transaction | undefined ;
+  transaction: Transaction | undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private transactionService: TransactionService){}
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    if(id){
-      this.transaction = await this.transactionService.get(id);
+    if(!id){
+      this.close()
+      return;
     }
+
+    const tFound = await this.transactionService.get(id);
+    if(!tFound){
+      this.close()
+      return;
+    }
+    this.transaction = tFound;
   }
 
   close(){

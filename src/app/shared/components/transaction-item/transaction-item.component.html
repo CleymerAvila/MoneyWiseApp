@@ -16,10 +16,16 @@
   </ion-label>
 
   <ion-label slot="end">
-    <h3 [style]="transaction.type === 'Ingreso' ? 'color: green' : 'color: red'">
+    <!-- <h3 [style]="transaction.type === 'Ingreso' ? 'color: green' : 'color: red'">
       {{ transaction.type === "Ingreso" ? "+" : "-" }}
       {{ transaction.amount | currency: "COP" }}
-    </h3>
+    </h3> -->
+    <app-amount-display
+      *ngIf="transaction"
+      [amount]="transaction.amount"
+      [type]="transaction.type.toLocaleLowerCase()"
+      size="small"
+    />
     <p style="text-align: end">{{ transaction.issueDate }}</p>
 
     <p style="text-align: end;"><ion-icon size="medium" [name]="!transaction.proofImage ? 'image' : 'alert-circle'"></ion-icon></p>

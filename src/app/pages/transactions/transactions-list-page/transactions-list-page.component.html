@@ -24,12 +24,21 @@
       <ion-icon :icon="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list lines="inset">
-    @for (transaction of transactions; track $index) {
-      <app-transaction-item
-        [transaction]="transaction"
-        (onDetail)="onClickedItem($event)"
-      />
-    }
-  </ion-list>
+  @if(transactions.length > 0){
+    <ion-list lines="inset">
+      @for (transaction of transactions; track $index) {
+        <app-transaction-item
+          [transaction]="transaction"
+          (onDetail)="onClickedItem($event)"
+        />
+      }
+    </ion-list>
+  } @else {
+    <app-empty-state
+      message="No hay transacciones disponible en el momento"
+      action="dashboard"
+      iconName="layer-outline"
+      (onAction)="handleAction($event)"
+    />
+  }
 </ion-content>
