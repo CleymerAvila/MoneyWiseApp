@@ -11,6 +11,7 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
 })
 export class TransactionsListPageComponent  implements OnInit {
   transactions!: Transaction[];
+  segmentSelected: string  = 'list';
 
   constructor(private transactionService: TransactionService, private router: Router) { }
 
@@ -20,6 +21,10 @@ export class TransactionsListPageComponent  implements OnInit {
 
   ionViewWillEnter(){
     this.transactionService.transactions$.subscribe(data => this.transactions = data);
+  }
+
+  handleClick(event: any){
+    this.router.navigate(['./tabs/transactions/', event])
   }
 
   onClickedItem(event: any){

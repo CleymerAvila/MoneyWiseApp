@@ -7,6 +7,7 @@ import { TransactionsPageRoutingModule } from './transactions-routing.module';
 import { TransactionsPage } from './transactions.page';
 import { SharedModule } from "src/app/shared/shared-module";
 import { TransactionsListPageComponent } from './transactions-list-page/transactions-list-page.component';
+import { TransactionSearchComponent } from './transaction-search/transaction-search.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { TransactionsListPageComponent } from './transactions-list-page/transact
   declarations: [
     TransactionsPage,
     TransactionsListPageComponent,
-    TransactionsFormComponent
+    TransactionsFormComponent,
+    TransactionSearchComponent
   ]
 })
 export class TransactionsPageModule {}

@@ -19,7 +19,6 @@ export class CategoryBadgeComponent implements OnInit {
   constructor() {}
 
   async ngOnInit() {
-    console.log('Categoria pasada por el componente padre',  this.category)
     const iconCategory = this.iconCategories.find(
       iconCateg => iconCateg.category === this.category
     )

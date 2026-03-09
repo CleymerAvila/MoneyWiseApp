@@ -23,7 +23,6 @@ export class SelectFieldComponent  implements OnInit {
   }
 
   onCategoryChange(event : any){
-    console.log('La categoria selecciona es ', event.detail.value);
     this.value = event.detail.value;
     this.onChange.emit(this.value);
   }

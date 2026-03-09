@@ -4,6 +4,7 @@ import { TransactionsPage } from './transactions.page';
 import { TransactionsListPageComponent } from './transactions-list-page/transactions-list-page.component';
 import { TransactionDetailComponent } from 'src/app/shared/components/transaction-detail/transaction-detail.component';
 import { TransactionsFormComponent } from './transactions-form/transactions-form.component';
+import { TransactionSearchComponent } from './transaction-search/transaction-search.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path:'list',
         component: TransactionsListPageComponent
+      },
+      {
+        path: 'search',
+        component: TransactionSearchComponent
       },
       {
         path: 'detail/:id',
