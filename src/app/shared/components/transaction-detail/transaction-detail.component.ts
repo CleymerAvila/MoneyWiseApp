@@ -11,6 +11,7 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
 })
 export class TransactionDetailComponent  implements OnInit {
   transaction: Transaction | undefined;
+  loadingData: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private transactionService: TransactionService){}
   async ngOnInit() {
@@ -26,6 +27,7 @@ export class TransactionDetailComponent  implements OnInit {
       return;
     }
     this.transaction = tFound;
+    this.loadingData = false;
   }
 
   close(){

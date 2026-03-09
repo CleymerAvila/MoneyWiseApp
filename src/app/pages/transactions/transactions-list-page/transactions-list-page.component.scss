@@ -1,7 +1,25 @@
 ion-list {
   --border-radius: 20px;
 }
+ion-card {
+  --padding: 0;
+  margin: 0;
+  --border: 1px solid transparent;
+  height: 100vh;
 
+  ion-card-content.ion-list {
+    &:last-child{
+      list-style: none;;
+    }
+  }
+
+  ion-label {
+    text-align: center;
+    font-size: medium;
+    font-weight: 600;
+    color: #444;
+  }
+}
 
 ion-tab-bar {
   --background: #56e39f;

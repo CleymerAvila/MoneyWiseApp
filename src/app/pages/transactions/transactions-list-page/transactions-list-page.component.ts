@@ -11,7 +11,6 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
 })
 export class TransactionsListPageComponent  implements OnInit {
   transactions!: Transaction[];
-  isDetailOpen: boolean = false;
 
   constructor(private transactionService: TransactionService, private router: Router) { }
 

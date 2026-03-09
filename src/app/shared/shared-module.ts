@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,8 @@ import { AmountDisplayComponent } from './components/amount-display/amount-displ
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { SelectFieldComponent } from './components/select-field/select-field.component';
 import { DateFieldComponent } from './components/date-field/date-field.component';
+import { CopCurrencyPipe } from './pipes/cop-currency-pipe';
+import { RelativeDatePipe } from './pipes/relative-date-pipe';
 
 
 
@@ -29,7 +31,9 @@ import { DateFieldComponent } from './components/date-field/date-field.component
     AmountDisplayComponent,
     EmptyStateComponent,
     SelectFieldComponent,
-    DateFieldComponent
+    DateFieldComponent,
+    CopCurrencyPipe,
+    RelativeDatePipe,
   ],
   imports: [
     CommonModule,
@@ -53,7 +57,9 @@ import { DateFieldComponent } from './components/date-field/date-field.component
     AmountDisplayComponent,
     EmptyStateComponent,
     SelectFieldComponent,
-    DateFieldComponent
+    DateFieldComponent,
+    CopCurrencyPipe,
+    RelativeDatePipe
   ]
 })
 export class SharedModule { }
