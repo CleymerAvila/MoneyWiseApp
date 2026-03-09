@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Transaction } from 'src/app/core/models/transaction.model';
 import { TransactionService } from 'src/app/core/services/transaction-service';
@@ -30,5 +30,14 @@ export class TransactionDetailComponent  implements OnInit {
 
   close(){
     this.router.navigate(['../'], {relativeTo : this.route})
+  }
+
+  async onDelete(){
+    await this.transactionService.delete(this.transaction!.id);
+    this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
+  onUpdate(){
+    this.router.navigate(['../../edit/', this.transaction!.id], {relativeTo: this.route})
   }
 }

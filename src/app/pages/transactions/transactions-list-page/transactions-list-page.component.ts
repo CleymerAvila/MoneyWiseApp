@@ -10,17 +10,17 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
   standalone: false,
 })
 export class TransactionsListPageComponent  implements OnInit {
-  transactions: Transaction[] = [];
+  transactions!: Transaction[];
   isDetailOpen: boolean = false;
 
   constructor(private transactionService: TransactionService, private router: Router) { }
 
-  ngOnInit() {
-    this.transactionService.transactions$.subscribe({
-      next: (response) => {
-        this.transactions = response;
-      }
-    })
+  async ngOnInit() {
+    this.transactionService.transactions$.subscribe(data => this.transactions = data);
+  }
+
+  ionViewWillEnter(){
+    this.transactionService.transactions$.subscribe(data => this.transactions = data);
   }
 
   onClickedItem(event: any){

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ICON_CATEGORIES } from '../../constants/icon-categories';
 import { IconCategory } from '../../models/icon-category.model';
 
@@ -8,7 +8,7 @@ import { IconCategory } from '../../models/icon-category.model';
   styleUrls: ['./category-icon.component.scss'],
   standalone: false,
 })
-export class CategoryIconComponent  implements OnInit {
+export class CategoryIconComponent  implements OnChanges{
   @Input() category!: string;
   @Input() size!: string;
   nameIcon!: string;
@@ -18,15 +18,21 @@ export class CategoryIconComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    const iconCategory = this.iconCategories.find(
-      iconCateg => iconCateg.category === this.category
-    );
 
-    if(iconCategory){
-      this.nameIcon = iconCategory.icon;
-      this.colorBackground = iconCategory.colorBackground;
+  ngOnChanges(changes: SimpleChanges) {
+
+    if (changes['category']) {
+
+      const iconCategory = this.iconCategories.find(
+        icon => icon.category === this.category
+      );
+
+      if (iconCategory) {
+        this.nameIcon = iconCategory.icon;
+        this.colorBackground = iconCategory.colorBackground;
+      }
+
     }
-  }
 
+  }
 }

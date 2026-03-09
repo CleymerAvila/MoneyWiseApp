@@ -43,6 +43,8 @@ export class AuthService {
     this.storage.remove('user');
     this.userSubject.next(null);
     this.router.navigate(['./auth/login']);
+    // borrando ahora despues de salir.
+    this.storage.clearAllData();
   }
 
   async isAuthenticated(): Promise<boolean> {

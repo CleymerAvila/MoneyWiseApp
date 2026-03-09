@@ -1,0 +1,27 @@
+ion-segment {
+  --background: rgb(75, 75, 213);
+  --padding-top: 10px;
+
+  ion-segment-button {
+    --color: #fff;
+    padding: 5px;
+    font-weight: 600;
+  }
+
+  ion-segment-button.segment-button-checked {
+    border: none;
+    color: white ;
+    background-color: rgb(144, 144, 222);
+  }
+}
+
+
+ion-row {
+  padding: 7px;
+  width: 100%;
+}
+
+app-date-field, app-select-field, app-form-input {
+  width: 100%;
+}
+

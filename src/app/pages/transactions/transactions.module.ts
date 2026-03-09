@@ -1,3 +1,4 @@
+import { TransactionsFormComponent } from './transactions-form/transactions-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,8 @@ import { TransactionsListPageComponent } from './transactions-list-page/transact
 ],
   declarations: [
     TransactionsPage,
-    TransactionsListPageComponent
+    TransactionsListPageComponent,
+    TransactionsFormComponent
   ]
 })
 export class TransactionsPageModule {}

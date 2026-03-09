@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TransactionsPage } from './transactions.page';
 import { TransactionsListPageComponent } from './transactions-list-page/transactions-list-page.component';
 import { TransactionDetailComponent } from 'src/app/shared/components/transaction-detail/transaction-detail.component';
+import { TransactionsFormComponent } from './transactions-form/transactions-form.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,14 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: TransactionDetailComponent
+      },
+      {
+        path: 'create',
+        component: TransactionsFormComponent
+      },
+      {
+        path: 'edit/:id',
+        component: TransactionsFormComponent
       },
       {
         path: '**',

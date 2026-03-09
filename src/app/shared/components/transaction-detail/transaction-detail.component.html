@@ -6,6 +6,10 @@
     <ion-title>
       <ion-label> Detalles Transacción </ion-label>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDelete()"><ion-icon size="medium" name="trash"></ion-icon></ion-button>
+      <ion-button (click)="onUpdate()"><ion-icon size="medium" name="create"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-no-padding">

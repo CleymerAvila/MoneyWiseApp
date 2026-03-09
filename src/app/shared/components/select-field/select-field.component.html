@@ -1,0 +1,23 @@
+<ion-list>
+  <ion-item>
+    <ion-select
+      interface="modal"
+      [interfaceOptions]="customModalOptions"
+      okText="Confirmar" cancelText="Salir"
+      [value]="value"
+      [placeholder]="label"
+      (ionChange)="onCategoryChange($event)"
+      [value]="value">
+      @for(option of options; track option){
+        <ion-select-option [value]="option.category" >
+          {{option.category}}
+          <!-- <app-category-badge
+            *ngIf="option.category"
+            [category]="option.category"
+            [showIcon]="true"
+          /> -->
+        </ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+</ion-list>

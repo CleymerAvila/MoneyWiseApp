@@ -1,0 +1,15 @@
+<!-- Ejemplo básico en un modal -->
+<ion-item>
+  <ion-label>{{ label }}</ion-label>
+  <ion-datetime-button datetime="datetime"></ion-datetime-button>
+</ion-item>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime
+      [value]="value"
+     (ionChange)="onDateChange($event)"
+     id="datetime" presentation="date">
+    </ion-datetime>
+  </ng-template>
+</ion-modal>

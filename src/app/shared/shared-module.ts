@@ -12,6 +12,8 @@ import { TransactionDetailComponent } from './components/transaction-detail/tran
 import { CategoryBadgeComponent } from './components/category-badge/category-badge.component';
 import { AmountDisplayComponent } from './components/amount-display/amount-display.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import { SelectFieldComponent } from './components/select-field/select-field.component';
+import { DateFieldComponent } from './components/date-field/date-field.component';
 
 
 
@@ -26,6 +28,8 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
     CategoryBadgeComponent,
     AmountDisplayComponent,
     EmptyStateComponent,
+    SelectFieldComponent,
+    DateFieldComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
     TransactionDetailComponent,
     CategoryBadgeComponent,
     AmountDisplayComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    SelectFieldComponent,
+    DateFieldComponent
   ]
 })
 export class SharedModule { }
