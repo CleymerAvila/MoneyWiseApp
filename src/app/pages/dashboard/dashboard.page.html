@@ -1,13 +1,90 @@
-<app-header
-  title="Dashboard"
->
-</app-header>
-<ion-content [fullscreen]="true">
-  <app-select-field
-    [options]="listOptions"
-    label="Categoria"
-    value="Selecciona"
-  />
+<app-header title="Dashboard"> </app-header>
+<ion-content class="dashboard-content">
+  <ion-card class="balance-card">
+    <ion-card-content>
+      <div class="balance-container">
+        <span class="balance-label">Balance Total</span>
+        <h1 class="balance-value">
+          {{ totalBalance$ | async | currency:'COP':'symbol':'1.0-0' }}
+        </h1>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-  <app-date-field/>
+  <ion-grid class="metrics-grid">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="metric-card income">
+          <ion-card-content>
+            <div class="metric-container">
+              <span class="metric-label">Ingresos</span>
+              <h2>
+                {{ totalIncome$ | async | copCurrency }}
+              </h2>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="metric-card expense">
+          <ion-card-content>
+            <div class="metric-container">
+              <span class="metric-label">Gastos</span>
+              <h2>
+                {{ totalExpenses$ | async | copCurrency}}
+              </h2>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- GRAFICOS -->
+  <ion-card class="chart-card">
+    <ion-card-header>
+      <ion-card-title>Gastos por categoría</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- @if(pieChartData$ | async; as pieData){
+
+      <canvas
+        baseChart
+        [data]="pieData"
+        [type]="pieChartType"
+        >
+      </canvas>
+
+      } -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="recent-card">
+    <ion-card-header>
+      <ion-card-title>Últimas transacciones</ion-card-title>
+    </ion-card-header>
+
+    <ion-list>
+      @if(recentTransactions$ | async; as transactions){
+        @for(transaction of transactions; track transaction.id){
+        <ion-item>
+          <ion-label>
+            <h2>{{ transaction.category }}</h2>
+            <p>{{ transaction.issueDate | date:'mediumDate' }}</p>
+          </ion-label>
+
+          <ion-note
+            slot="end"
+            [color]="transaction.type === 'Ingreso' ? 'success' : 'danger'"
+          >
+            {{ transaction.amount | copCurrency }}
+          </ion-note>
+        </ion-item>
+
+        }
+     }
+    </ion-list>
+  </ion-card>
 </ion-content>

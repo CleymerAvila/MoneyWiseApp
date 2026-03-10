@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ICON_CATEGORIES } from 'src/app/shared/constants/icon-categories';
-import { IconCategory } from 'src/app/shared/models/icon-category.model';
+import { AnalyticsService } from 'src/app/core/services/analytics-service';
+import { ChartConfiguration } from 'chart.js';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class DashboardPage implements OnInit {
-  listOptions: IconCategory[] = ICON_CATEGORIES;
-  constructor() { }
+  totalBalance$ = this.analyticsService.totalBalance$;
+  totalIncome$ = this.analyticsService.totalIncome$;
+  totalExpenses$ = this.analyticsService.totalExpenses$;
+  expenseByCategory$ = this.analyticsService.expenseByCategory$;
+  expenseByMonth$ = this.analyticsService.expenseByMonth$;
+  recentTransactions$ = this.analyticsService.recentTransactions$;
+
+  constructor(private analyticsService: AnalyticsService) {}
 
   async ngOnInit() {
     // this.listOptions = ICON_CATEGORIES
   }
-
 }
