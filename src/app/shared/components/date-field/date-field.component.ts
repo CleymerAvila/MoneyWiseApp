@@ -9,10 +9,19 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class DateFieldComponent  implements OnInit {
   @Input() label!:  string;
   @Input() value: string = new Date().toISOString();
+  minDate!: string;
+  maxDate!: string;
   @Output() onChange = new EventEmitter<string>();
   error!: string;
 
-  constructor() { }
+  constructor() {
+    const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0];
+
+    const twoYearAgo = new Date();
+    twoYearAgo.setFullYear(today.getFullYear() - 2);
+    this.minDate = twoYearAgo.toISOString().split('T')[0];
+  }
 
   ngOnInit() {}
 

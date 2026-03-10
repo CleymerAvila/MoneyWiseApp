@@ -8,6 +8,8 @@
   <ng-template>
     <ion-datetime
       [value]="value"
+      [min]="minDate"
+      [max]="maxDate"
      (ionChange)="onDateChange($event)"
      id="datetime" presentation="date">
     </ion-datetime>

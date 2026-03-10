@@ -2,11 +2,11 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button type="button" (click)="close()">
-        <ion-icon  slot="icon-only" name="close"></ion-icon>
+        <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
-      <ion-label>{{ transaction ? 'Actualizar' : 'Agregar' }}</ion-label>
+      <ion-label>{{ transaction ? "Actualizar" : "Agregar" }}</ion-label>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button type="submit" form="transactionForm">
@@ -17,14 +17,22 @@
 </ion-header>
 <ion-content class="ion-no-padding">
   <ion-card>
-    <form id="transactionForm" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <form
+      id="transactionForm"
+      [formGroup]="transactionForm"
+      (ngSubmit)="onSubmit()"
+    >
       <ion-card-header>
         <ion-grid [fixed]="true" class="ion-no-padding">
           <ion-row class="ion-justify-content-start">
             <ion-label>Tipo Transaccion</ion-label>
           </ion-row>
           <ion-row class="ion-justify-content-start">
-            <ion-segment formControlName="type" ngDefaultControl value="Ingreso">
+            <ion-segment
+              formControlName="type"
+              ngDefaultControl
+              value="Ingreso"
+            >
               <ion-segment-button value="Ingreso">
                 <ion-label>Ingreso</ion-label>
               </ion-segment-button>
@@ -40,7 +48,14 @@
             <ion-label>Categoria</ion-label>
           </ion-row>
           <ion-row class="ion-justify-content-start">
-            <app-select-field formControlName="category" [value]="transaction?.category" (onChange)="handleCategoryChange($event)" ngDefaultControl [options]="categoriesOptions" label="Categoria" />
+            <app-select-field
+              formControlName="category"
+              [value]="transaction?.category"
+              (onChange)="handleCategoryChange($event)"
+              ngDefaultControl
+              [options]="categoriesOptions"
+              label="Categoria"
+            />
           </ion-row>
           <ion-row class="ion-justify-content-start">
             <ion-label>Fecha realización</ion-label>
@@ -48,15 +63,21 @@
           <ion-row class="ion-justify-content-between">
             <app-date-field
               formControlName="issueDate"
-                [value]="transaction ?  transaction.issueDate : currentDateString "
-                (onChange)="handleDateChange($event)"
-              ngDefaultControl  label="Seleccione una fecha" />
+              [value]="transaction ? transaction.issueDate : currentDateString"
+              (onChange)="handleDateChange($event)"
+              ngDefaultControl
+              label="Seleccione una fecha"
+            />
           </ion-row>
           <ion-row class="ion-justify-content-start">
             <ion-label>Monto</ion-label>
           </ion-row>
           <ion-row>
-            <app-form-input formControlName="amount" ngDefaultControl type="number" />
+            <app-form-input
+              formControlName="amount"
+              ngDefaultControl
+              type="number"
+            />
           </ion-row>
         </ion-grid>
       </ion-card-header>
@@ -76,6 +97,49 @@
         </ion-row>
         <ion-row>
           <!-- AQUI EL COMPONENTE PARA MOSTRAR, SELECCIONAR, TOMAR O ELIMINAR FOTO  -->
+          <ion-thumbnail>
+            @if(transaction){
+              <img [src]="transaction.proofImage ? getImageUrl(transaction.proofImage) : proofImageUrl">
+            } @else {
+              <img [src]="proofImageUrl" alt="No hay imagen seleccionada">
+            }
+          </ion-thumbnail>
+          <ion-button (click)="setOpen(true)">seleccionar foto</ion-button>
+          <ion-modal [isOpen]="isModalSelectImageOpen">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-buttons slot="start">
+                    <ion-button type="button" (click)="setOpen(false)">
+                      <ion-icon slot="icon-only" name="close"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                  <ion-title>
+                    <ion-label>Seleccionar Foto</ion-label>
+                  </ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button type="button" (click)="closePhotoSelectorModal()">
+                      <ion-icon
+                        slot="icon-only"
+                        name="checkmark-sharp"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding ion-align-item-center" >
+                <ion-thumbnail style="--size: 250px;">
+                  @if(transaction){
+                    <img [src]="transaction.proofImage ? getImageUrl(transaction.proofImage) : this.photoToSave.webPath" [alt]="transaction.description">
+                  } @else {
+                    <img [src]="proofImageUrl" alt="No hay imagen seleccionada">
+                  }
+                </ion-thumbnail>
+                <ion-button (click)="openCamera()" expand="block">Tomar Foto</ion-button>
+                <ion-button (click)="selectFromCamera()" expand="block">Seleccionar Foto</ion-button>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
         </ion-row>
       </ion-card-content>
     </form>

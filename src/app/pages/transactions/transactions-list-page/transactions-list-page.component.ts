@@ -16,11 +16,22 @@ export class TransactionsListPageComponent  implements OnInit {
   constructor(private transactionService: TransactionService, private router: Router) { }
 
   async ngOnInit() {
-    this.transactionService.transactions$.subscribe(data => this.transactions = data);
+    this.loadTransactions();
+  }
+
+  async loadTransactions(){
+    this.transactionService.transactions$.subscribe({
+      next: (transactions) => {
+        this.transactions = transactions.sort((a, b) =>
+          new Date(a.issueDate).getTime() -
+          new Date(b.issueDate).getTime()
+        )
+      }
+    })
   }
 
   ionViewWillEnter(){
-    this.transactionService.transactions$.subscribe(data => this.transactions = data);
+    this.loadTransactions();
   }
 
   handleClick(event: any){

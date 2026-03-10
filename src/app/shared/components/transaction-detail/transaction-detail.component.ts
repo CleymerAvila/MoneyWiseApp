@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Transaction } from 'src/app/core/models/transaction.model';
 import { TransactionService } from 'src/app/core/services/transaction-service';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -12,6 +13,7 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
 export class TransactionDetailComponent  implements OnInit {
   transaction: Transaction | undefined;
   loadingData: boolean = true;
+  proofImageUrl = '../../../../assets/photo-camera-off-svgrepo-com.png';
 
   constructor(private route: ActivatedRoute, private router: Router, private transactionService: TransactionService){}
   async ngOnInit() {
@@ -28,8 +30,13 @@ export class TransactionDetailComponent  implements OnInit {
     }
     this.transaction = tFound;
     this.loadingData = false;
+    console.log(this.transaction);
   }
 
+  getImageUrl(fileName: string){
+    const path = `data/${fileName}`
+    return Capacitor.convertFileSrc(path);
+  }
   close(){
     this.router.navigate(['../'], {relativeTo : this.route})
   }

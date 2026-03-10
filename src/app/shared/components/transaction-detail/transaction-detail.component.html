@@ -76,8 +76,12 @@
           <ion-label>{{transaction?.description}}</ion-label>
         </ion-row>
         <ion-row>
+          {{transaction!.proofImage }}
           <ion-thumbnail >
-            <img [src]="transaction?.proofImage" [alt]="transaction?.description">
+            @if(transaction){
+              <img [src]="transaction.proofImage ? getImageUrl(transaction.proofImage)  : proofImageUrl " [alt]="transaction.description">
+            }
+            <!-- <img [src]="getImageUrl(transaction?.proofImage)" [alt]="transaction?.description"> -->
           </ion-thumbnail>
         </ion-row>
       </ion-grid>

@@ -1,3 +1,4 @@
+import { CameraService } from './../../../core/services/camera-service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +7,7 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
 import { ICON_CATEGORIES } from 'src/app/shared/constants/icon-categories';
 import { IconCategory } from 'src/app/shared/models/icon-category.model';
 import { v4  as uuid } from 'uuid';
+import { Capacitor  } from '@capacitor/core';
 
 @Component({
   selector: 'app-transactions-form',
@@ -26,11 +28,16 @@ export class TransactionsFormComponent  implements OnInit {
   proofImage!: FormControl;
   currentDateString = new Date().toISOString();
   isEditMode: boolean = false;
+  isModalSelectImageOpen = false;
+  ASSETS_BASE_URL = '../../../../assets/'
+  proofImageUrl = `${this.ASSETS_BASE_URL}photo-camera-off-svgrepo-com.png`;
+  photoToSave: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private  cameraService:CameraService
   ) {
   }
 
@@ -39,17 +46,22 @@ export class TransactionsFormComponent  implements OnInit {
     this.loadTransaction();
   }
 
+  setOpen(isOpen: boolean){
+    this.isModalSelectImageOpen = isOpen;
+  }
+
   async loadTransaction() {
     const id = this.route.snapshot.paramMap.get('id');
 
     if(!id) return;
-
     const transaction =  await this.transactionService.get(id);
     if(!transaction) return;
     this.isEditMode = true;
     this.transactionId = id;
     this.transaction = transaction;
-
+    if(transaction.proofImage){
+      this.proofImageUrl = this.getImageUrl(transaction.proofImage);
+    }
     // this.transactionForm.patchValue(transaction);
     this.transactionForm.patchValue({
       type: transaction.type,
@@ -91,13 +103,20 @@ export class TransactionsFormComponent  implements OnInit {
   async onSubmit(){
     if(this.transactionForm.valid){
       if(this.isEditMode){
+
         const transaction = {
           id: this.transactionId!,
           ...this.transactionForm.value
         }
 
+        if(this.photoToSave){
+          const fileName = await this.saveSelectedPhoto();
+          this.proofImage.setValue(fileName);
+          transaction.proofImage = fileName;
+        }
+        console.log('esta es la transaccion a editar: ', transaction)
+
         await this.transactionService.update(transaction);
-        // this.resetForm();
         this.transactionForm.reset();
         this.transaction = undefined;
         this.close();
@@ -105,8 +124,13 @@ export class TransactionsFormComponent  implements OnInit {
         this.isEditMode = false;
         this.transaction = undefined;
         console.log('Transaction Form Value: ', this.transactionForm.value)
-        console.log('Usuarioa a crear', this.createNewTrans(this.transactionForm.value));
         const transaction = this.createNewTrans(this.transactionForm.value);
+        if(this.photoToSave){
+          const fileName = await this.saveSelectedPhoto();
+          this.proofImage.setValue(fileName);
+          transaction!.proofImage = fileName ;
+        }
+        console.log('Este es la nueva transaccion', transaction);
         this.transactionForm.reset();
         await this.transactionService.create(transaction!);
         this.close();
@@ -132,17 +156,6 @@ export class TransactionsFormComponent  implements OnInit {
     return newTrans
   }
 
-  private resetForm(){
-    this.transactionForm.reset({
-      type: '',
-      category: '',
-      issueDate: this.currentDateString,
-      amount: '',
-      description: '',
-      proofImage: ''
-    });
-  }
-
   // Obtener todos los errores del formulario (recursivo)
   getFormValidationErrors() {
     Object.keys(this.transactionForm.controls).forEach(key => {
@@ -151,6 +164,39 @@ export class TransactionsFormComponent  implements OnInit {
         console.log('Control: ' + key + ', Errores: ', controlErrors);
       }
     });
+  }
+
+  async openCamera(){
+    const photo = await this.cameraService.takePhoto();
+    this.photoToSave = photo;
+    this.proofImageUrl  = this.photoToSave.webPath;
+  }
+
+  async selectFromCamera(){
+    const image = await this.cameraService.selectImage();
+    this.photoToSave = image;
+    this.proofImageUrl  = this.photoToSave.webPath;
+  }
+
+  async saveSelectedPhoto(){
+    const fileName = await this.cameraService.savePhoto(this.photoToSave);
+    return fileName;
+  }
+
+  getImageUrl(fileName: string){
+    const path = `data/${fileName}`
+    return Capacitor.convertFileSrc(path);
+  }
+
+  closePhotoSelectorModal(){
+    this.handlePhotoImageChange();
+    this.setOpen(false)
+  }
+
+  handlePhotoImageChange(){
+    if(this.photoToSave){
+      this.proofImageUrl = this.photoToSave.webPath!;
+    }
   }
 
   handleCategoryChange(event: any){
