@@ -13,7 +13,7 @@ export class AnalyticsService {
   totalBalance$ = this.transactions$.pipe(
     map((transactions) =>
       transactions.reduce((acc, t) => {
-        return t.type === 'Ingreso' ? Number(acc) + t.amount : Number(acc) - t.amount;
+        return t.type === 'Ingreso' ? acc + t.amount : acc - t.amount;
       }, 0),
     ),
   );

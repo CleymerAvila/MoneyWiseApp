@@ -5,7 +5,7 @@
       <div class="balance-container">
         <span class="balance-label">Balance Total</span>
         <h1 class="balance-value">
-          {{ totalBalance$ | async | currency:'COP':'symbol':'1.0-0' }}
+          {{ totalBalance$ | async | copCurrency }}
         </h1>
       </div>
     </ion-card-content>

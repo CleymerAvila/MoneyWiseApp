@@ -65,7 +65,8 @@ export class TransactionSearchComponent  implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.transactionService.transactions$.subscribe(data => this.transactions = data);
+    this.transactionService.transactions$
+    .subscribe(data => this.transactions = data);
   }
 
   onClickedItem(event: any){
@@ -73,7 +74,7 @@ export class TransactionSearchComponent  implements OnInit {
   }
 
   handleAction(event: any){
-    this.router.navigate(['../', event], {relativeTo: this.route})
+    this.router.navigate(['../', event], { relativeTo: this.route})
   }
 
 }

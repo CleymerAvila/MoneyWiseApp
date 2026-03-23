@@ -20,41 +20,42 @@
     <ion-fab-button [routerLink]="['../create']">
       <ion-icon :icon="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+</ion-fab>
 
 
   @if (transactions.length > 0) {
-  <ion-card-header>
-    <ion-label class="ion-text-center">
-      <strong>
-        {{segmentSelected === 'list' ? 'Orden Cronologico' : 'Filtra Según desees'}}
-      </strong></ion-label>
-  </ion-card-header>
-}
 
-<ion-content color="light" class="ion-no-padding">
+  }
+
+<ion-content color="light" class="ion-no-padding" >
   <div *ngIf="segmentSelected === 'list'">
-      @if (transactions.length === 0) {
-        <app-empty-state
-          message="No hay transacciones registradas"
-          action="dashboard"
-          iconName="layer-outline"
-          (onAction)="handleAction($event)"
-        />
-      }
       <ion-card class="ion-no-padding">
-        <ion-card-content>
-          @if (transactions.length > 0) {
-            <ion-list lines="inset">
-              @for (transaction of transactions; track $index) {
-                <app-transaction-item
+        @if(transactions.length > 0){
+          <ion-card-header>
+            <ion-label class="ion-text-center">
+              <strong>
+                {{segmentSelected === 'list' ? 'Orden Cronologico' : 'Filtra Según desees'}}
+              </strong>
+            </ion-label>
+          </ion-card-header>
+          <ion-card-content>
+              <ion-list>
+                @for (transaction of transactions; track $index) {
+                  <app-transaction-item
                   [transaction]="transaction"
                   (onDetail)="onClickedItem($event)"
-                />
-              }
-            </ion-list>
-          }
-        </ion-card-content>
+                  />
+                }
+              </ion-list>
+            </ion-card-content>
+        } @else {
+          <app-empty-state
+            message="No hay transacciones registradas"
+            action="dashboard"
+            iconName="layer-outline"
+            (onAction)="handleAction($event)"
+          />
+        }
       </ion-card>
   </div>
 
