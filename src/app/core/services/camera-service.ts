@@ -30,19 +30,18 @@ export class CameraService {
   }
 
   async savePhoto(photo: any){
-    const base64 = await this.readAsBase64(photo.webPath);
+    const base64 = await this.readAsBase64(photo);
 
     console.log('Bas64: ' + base64)
 
     const fileName = new Date().getTime() + '.jpeg';
 
-    const savedFile = await Filesystem.writeFile({
+    await Filesystem.writeFile({
       path : fileName,
       data: base64,
       directory: Directory.Data
     })
-    console.log('archivo de photo guardado!', savedFile)
-    console.log('ruta del archivo de photo guardado!', fileName)
+    console.log('Photo saved! :', fileName)
 
     return fileName;
   }
@@ -52,7 +51,9 @@ export class CameraService {
     const blob = await response.blob();
 
     console.log('Blob para convertir: ' + blob)
-    return await this.convertBlobToBase64(blob);
+    const base64Data =  await this.convertBlobToBase64(blob);
+
+    return (base64Data as string).split(',')[1];
   }
 
   private convertBlobToBase64(blob: Blob): Promise<string>{

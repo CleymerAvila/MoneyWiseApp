@@ -10,7 +10,7 @@ import { TransactionService } from 'src/app/core/services/transaction-service';
   standalone: false,
 })
 export class TransactionsListPageComponent  implements OnInit {
-  transactions!: Transaction[];
+  transactions: Transaction[] = [];
   segmentSelected: string  = 'list';
 
   constructor(private transactionService: TransactionService, private router: Router) { }
@@ -23,8 +23,8 @@ export class TransactionsListPageComponent  implements OnInit {
     this.transactionService.transactions$.subscribe({
       next: (transactions) => {
         this.transactions = transactions.sort((a, b) =>
-          new Date(a.issueDate).getTime() -
-          new Date(b.issueDate).getTime()
+          new Date(b.issueDate).getTime() -
+          new Date(a.issueDate).getTime()
         )
       }
     })

@@ -13,7 +13,12 @@ export class AnalyticsService {
   totalBalance$ = this.transactions$.pipe(
     map((transactions) =>
       transactions.reduce((acc, t) => {
-        return t.type === 'Ingreso' ? acc + t.amount : acc - t.amount;
+        return t.type === 'Ingreso'
+         ? Number(acc) + Number(t.amount)
+         : (t.type === 'Gasto'
+            ? Number(acc) - Number(t.amount)
+            : 0
+          );
       }, 0),
     ),
   );
@@ -62,8 +67,8 @@ export class AnalyticsService {
     map(transactions =>
       [...transactions]
         .sort((a, b) =>
-          new Date(a.issueDate).getTime() -
-          new Date(b.issueDate).getTime()
+          new Date(b.issueDate).getTime() -
+          new Date(a.issueDate).getTime()
         )
         .slice(0, 5)
     )
@@ -81,6 +86,14 @@ export class AnalyticsService {
     map(transactions =>
       transactions
           .filter(t => t.type === 'Gasto')
+          .reduce((sum, t) => sum + Number(t.amount), 0)
+    )
+  )
+
+  totalNeutrals$ = this.transactions$.pipe(
+    map(transactions =>
+      transactions
+          .filter(t => t.type === 'Neutral')
           .reduce((sum, t) => sum + Number(t.amount), 0)
     )
   )

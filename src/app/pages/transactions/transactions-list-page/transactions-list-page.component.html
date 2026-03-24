@@ -22,12 +22,7 @@
     </ion-fab-button>
 </ion-fab>
 
-
-  @if (transactions.length > 0) {
-
-  }
-
-<ion-content color="light" class="ion-no-padding" >
+<ion-content color="light" class="ion-no-padding" scrollY="false">
   <div *ngIf="segmentSelected === 'list'">
       <ion-card class="ion-no-padding">
         @if(transactions.length > 0){
@@ -38,8 +33,8 @@
               </strong>
             </ion-label>
           </ion-card-header>
-          <ion-card-content>
-              <ion-list>
+          <ion-card-content >
+              <ion-list lines="inset">
                 @for (transaction of transactions; track $index) {
                   <app-transaction-item
                   [transaction]="transaction"

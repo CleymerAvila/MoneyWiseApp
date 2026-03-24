@@ -8,6 +8,7 @@ import { ICON_CATEGORIES } from 'src/app/shared/constants/icon-categories';
 import { IconCategory } from 'src/app/shared/models/icon-category.model';
 import { v4  as uuid } from 'uuid';
 import { Capacitor  } from '@capacitor/core';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-transactions-form',
@@ -60,9 +61,8 @@ export class TransactionsFormComponent  implements OnInit {
     this.transactionId = id;
     this.transaction = transaction;
     if(transaction.proofImage){
-      this.proofImageUrl = this.getImageUrl(transaction.proofImage);
+      this.proofImageUrl = await this.getImageUrl(transaction.proofImage);
     }
-    // this.transactionForm.patchValue(transaction);
     this.transactionForm.patchValue({
       type: transaction.type,
       category: transaction.category,
@@ -113,8 +113,10 @@ export class TransactionsFormComponent  implements OnInit {
           const fileName = await this.saveSelectedPhoto();
           this.proofImage.setValue(fileName);
           transaction.proofImage = fileName;
+
+          this.proofImageUrl = await this.getImageUrl(fileName);
+          this.photoToSave = null;
         }
-        console.log('esta es la transaccion a editar: ', transaction)
 
         await this.transactionService.update(transaction);
         this.transactionForm.reset();
@@ -123,23 +125,21 @@ export class TransactionsFormComponent  implements OnInit {
       } else {
         this.isEditMode = false;
         this.transaction = undefined;
-        console.log('Transaction Form Value: ', this.transactionForm.value)
         const transaction = this.createNewTrans(this.transactionForm.value);
         if(this.photoToSave){
           const fileName = await this.saveSelectedPhoto();
           this.proofImage.setValue(fileName);
-          transaction!.proofImage = fileName ;
+          transaction!.proofImage = fileName;
+
+          this.proofImageUrl = await this.getImageUrl(fileName);
         }
-        console.log('Este es la nueva transaccion', transaction);
         this.transactionForm.reset();
         await this.transactionService.create(transaction!);
         this.close();
-        // await this.transactionService.create(this.transactionForm.value);
       }
     } else {
       this.getFormValidationErrors()
     }
-    console.log(this.transactionForm);
 
   }
 
@@ -169,13 +169,13 @@ export class TransactionsFormComponent  implements OnInit {
   async openCamera(){
     const photo = await this.cameraService.takePhoto();
     this.photoToSave = photo;
-    this.proofImageUrl  = this.photoToSave.webPath;
+    this.proofImageUrl  = photo.webPath!;
   }
 
   async selectFromCamera(){
     const image = await this.cameraService.selectImage();
     this.photoToSave = image;
-    this.proofImageUrl  = this.photoToSave.webPath;
+    this.proofImageUrl  = image.webPath!;
   }
 
   async saveSelectedPhoto(){
@@ -183,20 +183,16 @@ export class TransactionsFormComponent  implements OnInit {
     return fileName;
   }
 
-  getImageUrl(fileName: string){
-    const path = `data/${fileName}`
-    return Capacitor.convertFileSrc(path);
+  async getImageUrl(fileName: string){
+    const fileUri = await Filesystem.getUri({
+      directory: Directory.Data,
+      path: fileName
+    })
+    return Capacitor.convertFileSrc(fileUri.uri);
   }
 
   closePhotoSelectorModal(){
-    this.handlePhotoImageChange();
     this.setOpen(false)
-  }
-
-  handlePhotoImageChange(){
-    if(this.photoToSave){
-      this.proofImageUrl = this.photoToSave.webPath!;
-    }
   }
 
   handleCategoryChange(event: any){

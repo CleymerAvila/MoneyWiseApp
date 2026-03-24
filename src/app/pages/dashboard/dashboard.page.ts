@@ -13,6 +13,7 @@ export class DashboardPage implements OnInit {
   totalBalance$ = this.analyticsService.totalBalance$;
   totalIncome$ = this.analyticsService.totalIncome$;
   totalExpenses$ = this.analyticsService.totalExpenses$;
+  totalNeutrals$ = this.analyticsService.totalNeutrals$;
   expenseByCategory$ = this.analyticsService.expenseByCategory$;
   expenseByMonth$ = this.analyticsService.expenseByMonth$;
   recentTransactions$ = this.analyticsService.recentTransactions$;

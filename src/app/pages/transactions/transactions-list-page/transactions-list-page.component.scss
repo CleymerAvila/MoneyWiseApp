@@ -1,8 +1,25 @@
-ion-list {
-  --border-radius: 20px;
- overflow: important hidden !important;
+
+
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  margin-bottom: 20px;
+  height: 100vh;
+  width: 100%;
 }
 
+ion-card-content ion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
+  // background-color: #444;
+  margin-bottom: 50px;
+}
 ion-card {
   --padding: 0;
   margin: 0;

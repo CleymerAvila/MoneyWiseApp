@@ -50,7 +50,7 @@
 }
   <ion-card-content>
     @if (transactions.length > 0) {
-      <ion-list lines="inset">
+      <ion-list>
         @for (transaction of filteredTransactions; track $index) {
           <app-transaction-item
             [transaction]="transaction"

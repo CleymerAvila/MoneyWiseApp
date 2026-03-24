@@ -96,10 +96,9 @@
           <ion-label>Comprobante Fotografico</ion-label>
         </ion-row>
         <ion-row>
-          <!-- AQUI EL COMPONENTE PARA MOSTRAR, SELECCIONAR, TOMAR O ELIMINAR FOTO  -->
           <ion-thumbnail>
             @if(transaction){
-              <img [src]="transaction.proofImage ? getImageUrl(transaction.proofImage) : proofImageUrl">
+              <img [src]="this.proofImageUrl">
             } @else {
               <img [src]="proofImageUrl" alt="No hay imagen seleccionada">
             }
@@ -130,7 +129,10 @@
               <ion-content class="ion-padding ion-align-item-center" >
                 <ion-thumbnail style="--size: 250px;">
                   @if(transaction){
-                    <img [src]="transaction.proofImage ? getImageUrl(transaction.proofImage) : this.photoToSave.webPath" [alt]="transaction.description">
+                    <img
+                      [src]="proofImageUrl"
+                      [alt]="transaction.description"
+                    >
                   } @else {
                     <img [src]="proofImageUrl" alt="No hay imagen seleccionada">
                   }

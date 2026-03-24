@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Transaction } from 'src/app/core/models/transaction.model';
 import { TransactionService } from 'src/app/core/services/transaction-service';
 import { Capacitor } from '@capacitor/core';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -30,12 +31,18 @@ export class TransactionDetailComponent  implements OnInit {
     }
     this.transaction = tFound;
     this.loadingData = false;
+    if(this.transaction.proofImage){
+      this.proofImageUrl = await this.getImageUrl(this.transaction.proofImage);
+    }
     console.log(this.transaction);
   }
 
-  getImageUrl(fileName: string){
-    const path = `data/${fileName}`
-    return Capacitor.convertFileSrc(path);
+  async getImageUrl(fileName: string){
+    const fileUri = await Filesystem.getUri({
+      directory: Directory.Data,
+      path: fileName
+    })
+    return Capacitor.convertFileSrc(fileUri.uri);
   }
   close(){
     this.router.navigate(['../'], {relativeTo : this.route})

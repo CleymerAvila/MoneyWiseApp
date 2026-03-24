@@ -7,3 +7,12 @@ ion-label {
 }
 
 
+ion-note {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  text-overflow: ellipsis;
+  width: 100%;
+}

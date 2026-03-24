@@ -79,9 +79,10 @@
           {{transaction!.proofImage }}
           <ion-thumbnail >
             @if(transaction){
-              <img [src]="transaction.proofImage ? getImageUrl(transaction.proofImage)  : proofImageUrl " [alt]="transaction.description">
+              <img [src]="this.proofImageUrl">
+            } @else {
+              <img [src]="proofImageUrl" alt="No hay imagen seleccionada">
             }
-            <!-- <img [src]="getImageUrl(transaction?.proofImage)" [alt]="transaction?.description"> -->
           </ion-thumbnail>
         </ion-row>
       </ion-grid>
