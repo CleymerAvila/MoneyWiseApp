@@ -18,6 +18,7 @@ export class FormInputComponent  implements ControlValueAccessor {
   @Input() label!: string;
   @Input({required: true}) type!: string;
   @Input() controlName!: string;
+  @Input() iconStartName?: string;
 
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};

@@ -5,23 +5,24 @@ ion-input, ion-item {
   --border-color: #e0e0e0;
   --border-width: 1px;
   --highlight-color-focused: #2dc5a2;
-  margin-bottom: 12px;
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
 }
 
 ion-input.ng-invalid.ng-dirty {
-  --highlight-color-focused: red;
+  --highlight-color-focused: var(--app-danger);
 }
 
 
 :host(.ng-invalid.ng-touched) {
   ion-input {
-    --border-color: red;
-    --highlight-color-focused: red;
+    --border-color: var(--app-danger);
+    --highlight-color-focused: var(--app-danger);
   }
 }
 
 :host(.ng-valid.ng-dirty) {
   ion-input {
-    --border-color: #2dc5a2;       // borde verde
+    --border-color: var(--app-success);       // borde verde
   }
 }

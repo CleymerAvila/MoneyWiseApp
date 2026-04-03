@@ -1,12 +1,15 @@
 <ion-input
-[value]="value"
-(input)="onInput($event)"
-[disabled]="isDisabled"
-labelPlacement="floating"
-[type]="type"
-[placeholder]=""
-[label]="label"
-fill="outline"
-(ionBlur)="onBlur()"
+  [value]="value"
+  (input)="onInput($event)"
+  [disabled]="isDisabled"
+  labelPlacement="floating"
+  [type]="type"
+  [placeholder]=""
+  [label]="label"
+  fill="outline"
+  (ionBlur)="onBlur()"
 >
+@if(iconStartName){
+  <ion-icon [name]="iconStartName" slot="start"></ion-icon>
+}
 </ion-input>

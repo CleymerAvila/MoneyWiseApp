@@ -1,2 +1,37 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  /* Colores principales */
+  --app-primary: #01AE66;
+  --app-secondary: #0090c1;
+  --app-success: #007f5f;
+  --app-danger: #d80032;
+
+
+  /* Espaciados */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  /*Bordes*/
+  --border-radius: 12px;
+
+
+  /* Tipografía*/
+
+  /* Fuente principal */
+  --app-font-family: 'Inter', sans-serif;
+
+  /* Tamaños */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 20px;
+  --font-xl: 24px;
+
+  /* Pesos */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+}

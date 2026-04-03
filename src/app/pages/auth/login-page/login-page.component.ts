@@ -19,7 +19,7 @@ export default class LoginPageComponent  implements OnInit {
         validators: [Validators.required, Validators.email]
       });
     this.password = new FormControl('', {
-      validators:  [Validators.required, Validators.minLength(9)],
+      validators:  [Validators.required, Validators.minLength(9), Validators.maxLength(12)],
     });
     this.loginForm = new FormGroup({
       email: this.email,

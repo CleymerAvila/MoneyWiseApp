@@ -1,11 +1,9 @@
 
-
-
 ion-card-content {
   display: flex;
   flex-direction: column;
   overflow: visible;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   height: 100vh;
   width: 100%;
 }
@@ -25,7 +23,6 @@ ion-card {
   margin: 0;
   --border: 1px solid transparent;
   height: 100vh;
-
   ion-card-content.ion-list {
     &:last-child{
       list-style: none;;
@@ -41,35 +38,34 @@ ion-card {
 }
 
 ion-tab-bar {
-  --background: #56e39f;
+  --background: var(--app-primary);
   --color: #fff;
   border: none;
 }
 
 ion-toolbar {
-  --background: #56e39f;
+  --background: var(--app-primary);
   --color: #fff;
   border: none;
 }
 
 ion-segment {
-  --background: #56e39f;
-  border: #56e39f;
+  --background: white;
+  // border: 2px solid orange;
   ion-segment-button {
     color: white;
-    --border: 2px solid magenta;
+    // border: 2px solid magenta;
   }
 }
 
 
 ion-segment-button.segment-selected {
-  --background: #56e39f;
-  border-bottom: #a90505;
+  --background: white;
 }
 
 
 ion-segment-button::part(indicator-background) {
-  background: #fff;
+  background: var(--app-primary);
 }
 
 /* Material Design styles */
@@ -77,12 +73,13 @@ ion-segment-button.md::part(native) {
   color: rgb(153, 153, 155);
 }
 
-.segment-button-checked.md::part(native) {
-  color: #fff;
+.segment-button-checked.md::part(native){
+  color: var(--app-primary);
 }
 
 ion-segment-button.md::part(indicator-background) {
   height: 4px;
+  border-radius: 20px;
 }
 
 /* iOS styles */

@@ -1,4 +1,15 @@
+ion-tabs {
+  background: #fff;
+}
+
 ion-tab-bar {
-  --background: #56e39f;
-  --color: #fff;
+  --background: #fff;
+  --border: 1px solid #ddd;
+  border-radius: 15px 15px 0 0;
+}
+
+
+ion-tab-button{
+  --color: #999;
+  --color-selected: var(--app-primary);
 }

@@ -39,3 +39,6 @@ ion-content {
   --padding-top: env(safe-area-inset-top);       // respeta la barra superior
   --padding-bottom: env(safe-area-inset-bottom); // respeta la barra inferior
 }
+:root {
+  --ion-font-family: 'Inter', sans-serif;
+}
