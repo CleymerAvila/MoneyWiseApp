@@ -4,7 +4,7 @@
       <ion-back-button (click)="close()" defaultHref="/"> </ion-back-button>
     </ion-buttons>
     <ion-title>
-      <ion-label> Detalles </ion-label>
+      Detalles
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onDelete()"><ion-icon size="medium" name="trash"></ion-icon></ion-button>
@@ -37,7 +37,7 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-start">
-            <ion-title>{{ transaction?.type }}</ion-title>
+            <ion-label>{{ transaction?.type }}</ion-label>
         </ion-row>
 
         <ion-row class="ion-justify-content-start">
@@ -61,7 +61,7 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-start">
-            <ion-title>{{ transaction!.issueDate  | relativeDate}}</ion-title>
+            <ion-label>{{ transaction!.issueDate  | relativeDate}}</ion-label>
         </ion-row>
       </ion-grid>
     </ion-card-header>

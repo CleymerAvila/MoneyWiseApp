@@ -5,13 +5,13 @@
   }
 }
 ion-tab-bar {
-  --background: #56e39f;
+  --background: var(--app-primary);
   --color: #fff;
   border: none;
 }
 
 ion-toolbar {
-  --background: #56e39f;
+  --background: var(--app-primary);
   --color: #fff;
   border: none;
 }
@@ -27,6 +27,10 @@ ion-row {
 }
 
 
-ion-label, ion-title {
+ion-label {
   color: black;
+}
+
+ion-title {
+  color: white;
 }

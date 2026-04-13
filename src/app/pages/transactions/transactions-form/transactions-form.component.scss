@@ -15,13 +15,13 @@ ion-segment {
 }
 
 ion-tab-bar {
-  --background: #56e39f;
+  --background: var(--app-primary);
   --color: #fff;
   border: none;
 }
 
 ion-toolbar {
-  --background: #56e39f;
+  --background: var(--app-primary);
   --color: #fff;
   border: none;
 }

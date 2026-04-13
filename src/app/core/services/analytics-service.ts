@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TransactionService } from './transaction-service';
 import { map } from 'rxjs';
+import { ICON_CATEGORIES } from 'src/app/shared/constants/icon-categories';
 
 @Injectable({
   providedIn: 'root',
@@ -14,30 +15,42 @@ export class AnalyticsService {
     map((transactions) =>
       transactions.reduce((acc, t) => {
         return t.type === 'Ingreso'
-         ? Number(acc) + Number(t.amount)
-         : (t.type === 'Gasto'
+          ? Number(acc) + Number(t.amount)
+          : t.type === 'Gasto'
             ? Number(acc) - Number(t.amount)
-            : 0
-          );
+            : 0;
       }, 0),
     ),
   );
 
   expenseByCategory$ = this.transactions$.pipe(
     map((transactions) => {
-      const stats: Record<string, number> = {};
+      const mapCategory = new Map<string, number>();
 
       transactions
         .filter((t) => t.type === 'Gasto')
         .forEach((t) => {
-          if (!stats[t.category]) {
-            stats[t.category] = 0;
-          }
+          const current = mapCategory.get(t.category) ?? 0;
 
-          stats[t.category] += Number(t.amount);
+          mapCategory.set(t.category, current + Number(t.amount));
         });
 
-      return stats;
+      const labels: string[] = [];
+      const values: number[] = [];
+      const colors: string[] = [];
+
+      mapCategory.forEach((value, key) => {
+        labels.push(key);
+        values.push(value);
+
+        const category  = ICON_CATEGORIES.find(c => c.category === key);
+
+        colors.push(category?.colorBackground ?? '#cccccc')
+      });
+
+      return {
+        labels, values, colors
+      };
     }),
   );
 
@@ -54,7 +67,7 @@ export class AnalyticsService {
           stats[month] = 0;
         }
 
-        if(t.type === 'Gasto'){
+        if (t.type === 'Gasto') {
           stats[month] += Number(t.amount);
         }
       });
@@ -64,39 +77,37 @@ export class AnalyticsService {
   );
 
   recentTransactions$ = this.transactions$.pipe(
-    map(transactions =>
+    map((transactions) =>
       [...transactions]
-        .sort((a, b) =>
-          new Date(b.issueDate).getTime() -
-          new Date(a.issueDate).getTime()
+        .sort(
+          (a, b) =>
+            new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime(),
         )
-        .slice(0, 5)
-    )
-  )
-
-  totalIncome$ = this.transactions$.pipe(
-    map(transactions =>
-      transactions.filter(t => t.type === 'Ingreso')
-      .reduce((sum, t) => sum + Number(t.amount), 0)
-    )
+        .slice(0, 5),
+    ),
   );
 
+  totalIncome$ = this.transactions$.pipe(
+    map((transactions) =>
+      transactions
+        .filter((t) => t.type === 'Ingreso')
+        .reduce((sum, t) => sum + Number(t.amount), 0),
+    ),
+  );
 
   totalExpenses$ = this.transactions$.pipe(
-    map(transactions =>
+    map((transactions) =>
       transactions
-          .filter(t => t.type === 'Gasto')
-          .reduce((sum, t) => sum + Number(t.amount), 0)
-    )
-  )
+        .filter((t) => t.type === 'Gasto')
+        .reduce((sum, t) => sum + Number(t.amount), 0),
+    ),
+  );
 
   totalNeutrals$ = this.transactions$.pipe(
-    map(transactions =>
+    map((transactions) =>
       transactions
-          .filter(t => t.type === 'Neutral')
-          .reduce((sum, t) => sum + Number(t.amount), 0)
-    )
-  )
-
-
+        .filter((t) => t.type === 'Neutral')
+        .reduce((sum, t) => sum + Number(t.amount), 0),
+    ),
+  );
 }

@@ -62,16 +62,20 @@
     </ion-card-header>
 
     <ion-card-content>
-      <!-- @if(pieChartData$ | async; as pieData){
+      <!-- @if(pieChartData$ | async; as chartData){
 
       <canvas
         baseChart
-        [data]="pieData"
-        [type]="pieChartType"
+        [type]="'doughnout'"
+        [data]="pieChartData"
         >
       </canvas>
 
       } -->
+
+      <div class="chart-container">
+        <canvas #expenseChart></canvas>
+      </div>
     </ion-card-content>
   </ion-card>
 
